@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://EnemyFolder/Emeny.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/nightraiderfixed.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 76.3275
+height = 52.533
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 1870.56
+
+[node name="Emeny" type="KinematicBody2D"]
+position = Vector2( 509.117, 387.495 )
+scale = Vector2( 0.35, 0.35 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 224, 156 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="BulletPoint" type="Node2D" parent="."]
+position = Vector2( 110, 0 )
+scale = Vector2( -832.3, 1 )
+
+[node name="DetectionZone" type="Area2D" parent="."]
+scale = Vector2( 1, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+visible = false
+shape = SubResource( 2 )
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_DetectionZone_body_entered"]
